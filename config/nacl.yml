@@ -1,0 +1,14 @@
+- group: admin
+  permissions:
+    - resource: '*'
+      methods: '*'
+      action: allow
+
+- group: user
+  permissions:
+    - resource: 'dashboard/*'
+      methods: '*'
+      action: deny
+    - resource: 'profil/*'
+      methods: '*'
+      action: allow

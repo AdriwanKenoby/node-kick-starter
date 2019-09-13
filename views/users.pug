@@ -1,0 +1,32 @@
+extends dashboard
+
+mixin user(user)
+	tr
+		td.w-25
+			if user.avatar 
+				img.img-fluid.img-thumbnail.rounded-circle.w-25(src='../'+user.avatar alt='profil image')
+			else 
+				span
+					i.fas.fa-user
+		td= user.username
+		td= user.email
+		td= user.role
+		td.row
+			a.btn.btn-info.btn-sm.mx-1(href='/dashboard/users/'+user._id role='button') View
+			form(action='/dashboard/users?_method=DELETE' method='post')
+				input(type='hidden' name='id' value=user._id required)
+				button.btn.btn-danger.btn-sm.mx-1(type='submit') Delete
+
+block data
+	#users.table-responsive.my-2.p-2
+		table.table.table-striped.table-condensed
+			thead.thead-inverse
+				tr
+					th Profil Image
+					th Username
+					th Email
+					th Role
+					th Action
+			tbody
+				each user in data
+					+user(user)

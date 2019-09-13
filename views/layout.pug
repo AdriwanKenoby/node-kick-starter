@@ -1,0 +1,13 @@
+doctype html
+html
+	head
+		block head
+			include ./head.pug
+	body
+		.sticky-top
+			include ./header.pug
+			include ./navbar.pug
+			include ./messages.pug
+		#main.container-fluid.p-0.m-0
+			block content
+		include ./footer.pug

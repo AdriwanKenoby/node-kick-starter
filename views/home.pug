@@ -1,0 +1,58 @@
+extends layout
+
+block append head
+	link(rel='stylesheet', href='/stylesheets/home.css')
+
+mixin prestation(prestation)
+	.card.col-3.m-4
+		img.card-image.img-fluid.rounded-circle(src='../'+prestation.imagePath alt='prestation image')
+		.card-body
+			h4.card-title.text-uppercase= prestation.titre
+			h6.card-subtitle.mb-2.text-light= prestation.sous_titre
+			p.card-text= prestation.description
+			.row
+				.text-success.mx-2= prestation.prix
+				.text-info.mx-2= prestation.duration
+			
+block content	
+	section.parallax.bg1
+		img(src='./images/FFMBE-logo-RVB_petit.webp' alt='logo FFMBE')
+		.container.col-5
+			h3
+				blockquote(cite='Voltaire') "J'ai décidé d'être heureux parce que c'est bon pour la Santé", Voltaire
+			p Ici et Maintenant, vous décidez de prendre le temps.
+			| Prendre le temps de vous offrir un instant
+			| de relaxation intense, de renouer avec
+			| votre corps, de lui dire Merci et d’en
+			| prendre soin.
+			| Recevoir un massage c’est réapprendre à souffler, libérer les tensions, stimuler son
+			| système immunitaire, apaiser son esprit…
+			| Le massage bien-être est un des outils de
+			| prévention pour être et rester en bonne
+			| santé.
+			| C’est un espace où vous pouvez lâcher
+			| prise, reprendre des forces, repartir
+			| tonique, serein-e et souriant-e !
+			| Laissez vous guider, respirez !
+	section.static
+		.container
+			p Ici et Maintenant, vous décidez de
+			| prendre le temps.
+			| Prendre le temps de vous offrir un instant
+			| de relaxation intense, de renouer avec
+			| votre corps, de lui dire Merci et d’en
+			| prendre soin.
+			| Recevoir un massage c’est réapprendre à souffler, libérer les tensions, stimuler son
+			| système immunitaire, apaiser son esprit…
+			| Le massage bien-être est un des outils de
+			| prévention pour être et rester en bonne
+			| santé.
+			| C’est un espace où vous pouvez lâcher
+			| prise, reprendre des forces, repartir
+			| tonique, serein-e et souriant-e !
+			| Laissez vous guider, respirez !
+	section.parallax.bg2
+		.container#prestations
+			.row
+				each prestation in prestations
+					+prestation(prestation)

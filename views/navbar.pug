@@ -1,0 +1,26 @@
+nav.navbar.navbar-expand-sm.bg-dark.navbar-dark
+	a.navbar-brand(href='/home')
+		i.fas.fa-home
+	button.navbar-toggler(type='button' data-toggle='collapse' data-target='#collapsibleNavbar')
+		span.navbar-toggler-icon
+	#collapsibleNavbar.collapse.navbar-collapse
+		ul.navbar-nav
+			li.nav-item
+				a.nav-link(href='#') Massage
+			li.nav-item
+				a.nav-link(href='#') Posturologie
+			li.nav-item
+				a.nav-link(href='#') Réflexes archaïques
+			if !user
+				li.nav-item
+					a.nav-link(href='/login') Se Connecter
+				li.nav-item
+					a.nav-link(href='/register') S'enregistrer
+			else				
+				if user.role == 'admin'
+					li.nav-item
+						a.nav-link(href='/dashboard') Admin Panel
+				li.nav-item
+					a.nav-link(href='/profil') Profil
+				li#logout.nav-item.float-right
+					a.nav-link(href='/logout') Déconnection

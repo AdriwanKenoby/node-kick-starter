@@ -1,0 +1,29 @@
+extends layout
+
+block content
+	section#signup.text-dark
+		.container.py-3
+			.row.justify-content-sm-center
+				.col-sm-6.col-md-6
+					.card.border-info.text-center
+						.card-header
+							| Sign up to continue							
+						.card-body
+							form(action='/register' method='post')
+								fieldset
+									legend Sign up
+									.row.align-items-center.mt-4
+										.col
+											input.form-control(type='text' name='username' placeholder='Username' required)
+									.row.align-items-center.mt-4
+										.col
+											input.form-control(type='email' name='email' placeholder='Email' required)
+									.row.align-items-center.mt-4
+										.col
+											input.form-control(type='password' name='password' placeholder='Password' required)
+										.col
+											input.form-control(type='password' name='confirm' placeholder='Confirm Password' required)
+									.row.justify-content-start.mt-4
+										.col
+											input.btn.btn-primary.mt-4(type='submit')
+					a.float-right(href='/login') Already have an account

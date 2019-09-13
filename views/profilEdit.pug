@@ -1,0 +1,24 @@
+extends layout
+
+block content
+	section#profil.text-dark
+		.container.py-3
+			.row.justify-content-sm-center
+				.col-sm-6.col-md-6
+					.card.border-info.text-center
+						.card-header
+							| Edit your profil							
+						.card-body
+							form(action='/profil/edit' method='post' enctype='multipart/form-data')
+								fieldset
+									if user.avatar 
+										img.img-fluid.img-thumbnail.rounded-circle.w-25(src='../'+user.avatar alt='profil image')
+									else 
+										span
+											i.fas.fa-user
+									.row.align-items-center.mt-4
+										.col
+											input.custom-file(type='file' name='avatar')
+									.row.justify-content-start.mt-4
+										.col
+											input.btn.btn-primary.mt-4(type='submit')

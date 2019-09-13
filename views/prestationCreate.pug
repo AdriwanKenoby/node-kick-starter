@@ -1,0 +1,41 @@
+extends dashboard
+
+block data
+	section.text-dark.w-100
+		.container.py-3
+			.row.justify-content-sm-center
+				.col-sm-12.col-md-12
+					.card.border-info.text-center
+						.card-header
+							| Create Prestation							
+						.card-body
+							form(action='/dashboard/prestations/create' method='post' enctype='multipart/form-data')
+								fieldset
+									legend Prestation
+									.row.align-items-center.mt-4
+										.col
+											input.form-control(type='text' name='titre' placeholder='Titre' required)
+									.row.align-items-center.mt-4
+										.col
+											input.form-control(type='text' name='sous_titre' placeholder='Sous-titre' required)
+									.row.align-items-center.mt-4
+										.col
+											textarea.form-control(name='description' placeholder='description' rows='8' cols='30' required)
+									.row.align-items-center.mt-4
+										.col
+											select.form-control(name='duration' placeholder='durée' required)
+												option(value='30') 30 min
+												option(value='45') 45 min
+												option(value='60') 1 h
+												option(value='75') 1 h 15 min
+												option(value='90') 1 h 30 min
+												option(value='105') 1 h 45 min
+												option(value='120') 2 h
+										.col
+											input.form-control(type='number' name='prix' placeholder='Prix' required)
+									.row.align-items-center.mt-4
+										.col
+											input.custom-file(type='file' name='image' required)
+									.row.justify-content-start.mt-4
+										.col
+											input.btn.btn-primary.mt-4(type='submit')

@@ -1,0 +1,22 @@
+extends layout
+
+block content
+	section#signin.text-dark
+		.container.py-3
+			.row.justify-content-sm-center
+				.col-sm-6.col-md-6
+					.card.border-info.text-center
+						.card-header
+							| Sign in to continue							
+						.card-body
+							form.form-signin(action='/login' method='post')
+								fieldset
+									legend Login                  
+									input.form-control.mb-2(type='email' name='email' placeholder='Email' required autofocus)
+									input.form-control.mb-2(type='password' name='password' placeholder='Password' required)
+									input.btn.btn-lg.btn-primary.btn-block.mb-1(type='submit')
+									label.checkbox.float-left
+										| Remember me
+										input(type='checkbox' name='remember_me')
+					a.float-right(href='/register') Create an account
+					a.float-left(href='/forgot') Forgot password 					

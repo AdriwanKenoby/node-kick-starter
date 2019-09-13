@@ -1,0 +1,9 @@
+node_modules/
+.settings/
+yarn.lock
+.project
+.sublime-project
+sonar-project.properties
+.scannerwork/
+.jshintrc
+yarn-error.log

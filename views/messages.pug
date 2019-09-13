@@ -1,0 +1,16 @@
+if messages
+	#messages
+	if messages.error && messages.error.length > 0
+		each error in messages.error
+			.alert.alert-warning.alert-dismissible.fade.show(role='alert')
+				button.close(type='button' data-dismiss='alert' aria-label='Close')
+					span(aria-hidden='true') &times;
+				strong #{error}
+	if messages.success && messages.success.length > 0
+		each success in messages.success
+			.alert.alert-info.alert-dismissible.fade.show(role='alert')
+				button.close(type='button' data-dismiss='alert' aria-label='Close')
+					span(aria-hidden='true') &times;
+				strong #{success}
+
+	

@@ -1,0 +1,128 @@
+body {
+	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+body, html {
+	height: 100%;
+}
+
+a {
+	color: #ffffff;
+}
+
+@font-face {
+	font-family: GreatVibes;
+	src: url(/fonts/great-vibes/GreatVibes-Regular.otf);
+}
+
+header h1 {
+	font-family: GreatVibes, sans-serif;
+}
+
+footer h5 {
+	font-family: GreatVibes, sans-serif;
+}
+
+#main {
+	position: relative;
+    min-height: 100%;
+    background: linear-gradient(to bottom right, #ffffff 0%, #336699 100%);
+	background-color: #cccccc;
+}
+
+/* workaround modal-open padding issue */
+body.modal-open {
+	padding-right: 0 !important;
+}
+
+#sidebar {
+	padding-left: 0;
+}
+/*
+ * Off Canvas at medium breakpoint
+ * --------------------------------------------------
+ */
+@media screen and (max-width: 48em) {
+	.row-offcanvas {
+		position: relative;
+		-webkit-transition: all 0.25s ease-out;
+		-moz-transition: all 0.25s ease-out;
+		transition: all 0.25s ease-out;
+	}
+	.row-offcanvas-left .sidebar-offcanvas {
+		left: -33%;
+	}
+	.row-offcanvas-left.active {
+		left: 33%;
+		margin-left: -6px;
+	}
+	.sidebar-offcanvas {
+		position: absolute;
+		top: 0;
+		width: 33%;
+		height: 100%;
+	}
+}
+/*
+ * Off Canvas wider at sm breakpoint
+ * --------------------------------------------------
+ */
+@media screen and (max-width: 34em) {
+	.row-offcanvas-left .sidebar-offcanvas {
+		left: -45%;
+	}
+	.row-offcanvas-left.active {
+		left: 45%;
+		margin-left: -6px;
+	}
+	.sidebar-offcanvas {
+		width: 45%;
+	}
+}
+
+.card {
+	overflow: hidden;
+}
+
+.card-block .rotate {
+	z-index: 8;
+	float: right;
+	height: 100%;
+}
+
+.card-block .rotate svg {
+	color: rgba(20, 20, 20, 0.15);
+	position: absolute;
+	left: 0;
+	left: auto;
+	right: -10px;
+	bottom: 0;
+	display: block;
+	-webkit-transform: rotate(-44deg);
+	-moz-transform: rotate(-44deg);
+	-o-transform: rotate(-44deg);
+	-ms-transform: rotate(-44deg);
+	transform: rotate(-44deg);
+}
+
+header img {
+	width: 100%;
+	height: 30vh;
+}
+
+.centered {
+	z-index: 1;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+#logout {
+	position: absolute;
+	right: 5vh;
+}
+
+#users {
+	background-color: #cccccc;
+}
