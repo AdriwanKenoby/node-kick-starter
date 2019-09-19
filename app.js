@@ -21,6 +21,9 @@ const usersRouter = require('./routes/users');
 const dashboardRouter = require('./routes/dashboard');
 const profilRouter = require('./routes/profil');
 const prestationsRouter = require('./routes/prestations');
+const openingHoursRouter = require('./routes/opening-hours');
+const appointmentRouter = require('./routes/appointment');
+const categoriesRouter = require('./routes/categories');
 
 const app = express();
 
@@ -88,15 +91,18 @@ app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 //redirect font awesome CSS & JS
 app.use('/css', express.static(__dirname + '/node_modules/@fortawesome/fontawesome-free/css'));
 app.use('/js', express.static(__dirname + '/node_modules/@fortawesome/fontawesome-free/js'));
-app.use('/webfonts', express.static(__dirname + '/node_modules/@fortawesome/fontawesome-free/webfonts'))
+app.use('/webfonts', express.static(__dirname + '/node_modules/@fortawesome/fontawesome-free/webfonts'));
+app.use('/flatpickr', express.static(__dirname + '/node_modules/flatpickr/dist'));
 
 app.use('/home', homeRouter);
 app.use('/', authRouter);
 app.use('/dashboard', ensureLoggedIn('/login'), acl.authorize, dashboardRouter);
 app.use('/dashboard/users', ensureLoggedIn('/login'), acl.authorize, usersRouter);
 app.use('/profil', ensureLoggedIn('/login'), acl.authorize, profilRouter);
+app.use('/dashboard/categories', ensureLoggedIn('/login'), acl.authorize, categoriesRouter);
 app.use('/dashboard/prestations', ensureLoggedIn('/login'), acl.authorize, prestationsRouter);
-
+app.use('/dashboard/opening_hours', ensureLoggedIn('/login'), acl.authorize, openingHoursRouter);
+app.use('/appointment', ensureLoggedIn('/login'), acl.authorize, appointmentRouter);
 app.use('/', (req, res, next) => {
 	res.redirect('/home');
 });

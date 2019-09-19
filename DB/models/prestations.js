@@ -27,6 +27,11 @@ const PrestationSchema = Schema({
 	imagePath: {
 		type: String,
 		required: true
+	},
+	categorie: {
+		type: Schema.Types.ObjectId,
+		ref: 'categories',
+		required: true
 	}
 });
 

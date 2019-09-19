@@ -1,0 +1,20 @@
+extends dashboard
+
+block data
+	section.text-dark.w-100
+		.container.py-3
+			.row.justify-content-sm-center
+				.col-sm-12.col-md-12
+					.card.border-info.text-center
+						.card-header
+							| Create Categorie
+						.card-body
+							form(action='/dashboard/categories/' + (categorie ? 'update/' + categorie._id + '?_method=PUT' : 'create') method='post')
+								fieldset
+									legend Categorie
+									.row.align-items-center.mt-4
+										.col
+											input.form-control(type='text' name='name' placeholder='Name' value=(categorie ? categorie.name : false) required)
+									.row.justify-content-start.mt-4
+										.col
+											input.btn.btn-primary.mt-4(type='submit')

@@ -18,6 +18,7 @@
 		"express-acl": "^2.0.6",
 		"express-session": "^1.16.2",
 		"express-validator": "^6.2.0",
+		"flatpickr": "^4.6.2",
 		"fs": "^0.0.1-security",
 		"global": "^4.4.0",
 		"helmet": "^3.18.0",
@@ -35,6 +36,7 @@
 		"passport-local": "^1.0.0",
 		"passport-remember-me": "^0.0.1",
 		"popper.js": "^1.15.0",
-		"pug": "2.0.0-beta11"
+		"pug": "2.0.0-beta11",
+		"simple-opening-hours": "^0.1.1"
 	}
 }

@@ -8,7 +8,8 @@ const dbUri = "mongodb://" + uri.host + ':' + uri.port + '/' + uri.index;
 mongoose.connect(dbUri, {
 	useCreateIndex: true,
 	useFindAndModify: false,
-	useNewUrlParser: true
+	useNewUrlParser: true,
+	useUnifiedTopology: true
 });
 
 const db = mongoose.connection;

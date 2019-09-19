@@ -1,0 +1,32 @@
+extends layout
+
+block append head
+	link(rel='stylesheet', href='/flatpickr/flatpickr.min.css')
+	script(type='text/javascript' src='/flatpickr/flatpickr.min.js')
+			
+block content	
+	section
+		.container.py-3
+			.row.justify-content-sm-center
+				.col-sm-12.col-md-12
+					.card.border-info.text-center
+						.card-header
+							| RDV
+						.card-body
+							form(action='/appointment' method='post')
+								fieldset
+									legend RDV
+									.row.align-items-center.mt-4
+										.col
+											select.form-control(name='prestation' required)
+												each prestation in prestations
+													option(value=prestation._id)= prestation.titre
+									.row.align-items-center.mt-4
+										.col
+											input#flatpickr(type='text')
+											script.
+												var oh = '!{JSON.stringify([...oh])}';
+											script(type='text/javascript' src='/javascripts/appointment.js')
+									.row.justify-content-start.mt-4
+										.col
+											input.btn.btn-primary.mt-4(type='submit')

@@ -7,32 +7,37 @@ block data
 				.col-sm-12.col-md-12
 					.card.border-info.text-center
 						.card-header
-							| Create Prestation							
+							| Create Prestation
 						.card-body
-							form(action='/dashboard/prestations/create' method='post' enctype='multipart/form-data')
+							form(action='/dashboard/prestations/' + (prestation ? 'update/' + prestation._id + '?_method=PUT' : 'create') method='post' enctype='multipart/form-data')
 								fieldset
 									legend Prestation
 									.row.align-items-center.mt-4
 										.col
-											input.form-control(type='text' name='titre' placeholder='Titre' required)
+											input.form-control(type='text' name='titre' placeholder='Titre' value=(prestation ? prestation.titre : false) required)
 									.row.align-items-center.mt-4
 										.col
-											input.form-control(type='text' name='sous_titre' placeholder='Sous-titre' required)
+											input.form-control(type='text' name='sous_titre' placeholder='Sous-titre' value=(prestation ? prestation.sous_titre : false) required)
 									.row.align-items-center.mt-4
 										.col
-											textarea.form-control(name='description' placeholder='description' rows='8' cols='30' required)
+											select.form-control(name='categorie' required)
+												each categorie in categories
+													option(value=categorie._id selected=( prestation ? prestation.categorie===categorie._id : false))= categorie.name
+									.row.align-items-center.mt-4
+										.col
+											textarea.form-control(name='description' placeholder='description' rows='8' cols='30' required)= (prestation ? prestation.description : false)
 									.row.align-items-center.mt-4
 										.col
 											select.form-control(name='duration' placeholder='durée' required)
-												option(value='30') 30 min
-												option(value='45') 45 min
-												option(value='60') 1 h
-												option(value='75') 1 h 15 min
-												option(value='90') 1 h 30 min
-												option(value='105') 1 h 45 min
-												option(value='120') 2 h
+												option(value='30' selected=(prestation ? prestation.duration===30 : false)) 30 min
+												option(value='45' selected=(prestation ? prestation.duration==45 : false)) 45 min
+												option(value='60' selected=(prestation ? prestation.duration==60 : false)) 1 h
+												option(value='75' selected=(prestation ? prestation.duration==75 : false)) 1 h 15 min
+												option(value='90' selected=(prestation ? prestation.duration==90 : false)) 1 h 30 min
+												option(value='105' selected=(prestation ? prestation.duration==105 : false)) 1 h 45 min
+												option(value='120' selected=(prestation ? prestation.duration==120 : false)) 2 h
 										.col
-											input.form-control(type='number' name='prix' placeholder='Prix' required)
+											input.form-control(type='number' name='prix' placeholder='Prix' value=(prestation ? prestation.prix : false) required)
 									.row.align-items-center.mt-4
 										.col
 											input.custom-file(type='file' name='image' required)

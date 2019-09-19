@@ -1,0 +1,21 @@
+extends dashboard
+
+mixin categorie(categorie)
+	tr
+		td= categorie.name
+		td.row
+			a.btn.btn-info.btn-sm.mx-1(href='/dashboard/categories/'+categorie._id role='button') View
+			a.btn.btn-warning.btn-sm.mx-1(href='/dashboard/categories/update/'+categorie._id role='button') Update
+			form(action='/dashboard/categories?_method=DELETE' method='post')
+				input(type='hidden' name='id' value=categorie._id required)
+				button.btn.btn-danger.btn-sm.mx-1(type='submit') Delete
+
+block data
+	#categories.table-responsive.my-2.p-2
+		table.table.table-striped
+			thead.thead-inverse
+				tr
+					th Name
+			tbody
+				each categorie in data
+					+categorie(categorie)

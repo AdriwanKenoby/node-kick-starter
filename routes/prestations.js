@@ -2,8 +2,6 @@
 
 const express = require('express'),
 router = express.Router(),
-UserSchema = require('../DB/models/users'),
-PrestationSchema = require('../DB/models/prestations'),
 prestationsController = require('../controllers/prestationsController'),
 asyncMiddleware = require('../utils/asyncMiddleware'),
 multer  = require('multer'),
@@ -28,17 +26,7 @@ const upload = multer({
 
 router.get('/', asyncMiddleware(prestationsController.getAll));
 
-router.get('/create', asyncMiddleware(async (req, res, next) => {
-	const nb_users = await UserSchema.countDocuments({});
-	const nb_prestations = await PrestationSchema.countDocuments({});
-	res.render('prestationCreate', { 
-		title: 'Prestations Create', 
-		user: req.user,
-		messages: res.locals.flash,
-		nb_users: nb_users,
-		nb_prestations: nb_prestations		
-	});
-}));
+router.get('/create', asyncMiddleware(prestationsController.getCreatePage));
 
 router.post('/create', upload.single('image'), prestationsController.create);
 
@@ -46,20 +34,8 @@ router.get('/:id', prestationsController.getById);
 
 router.delete('/', prestationsController.deletePrestation);
 
-router.get('/update/:id', asyncMiddleware(async (req, res, next) => {
-	const prestation = await PrestationSchema.findById(req.params.id);
-	const nb_users = await UserSchema.countDocuments({});
-	const nb_prestations = await PrestationSchema.countDocuments({});
-	res.render('prestationUpdate', {
-		title: 'Prestation Update',
-		user: req.user,
-		messages: res.locals.flash,
-		nb_users: nb_users,
-		nb_prestations: nb_prestations,
-		prestation: prestation
-	});
-}));
+router.get('/update/:id', asyncMiddleware(prestationsController.getUpdatePage));
 
-router.patch('/update', upload.single('image'), asyncMiddleware(prestationsController.update));
+router.put('/update/:id', upload.single('image'), asyncMiddleware(prestationsController.update));
 
 module.exports = router;

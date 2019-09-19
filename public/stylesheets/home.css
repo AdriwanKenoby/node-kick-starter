@@ -41,6 +41,12 @@ section {
 	background: rgba(255, 255, 255, 0.6);
 }
 
+#presentation {
+	background: rgba(255, 255, 255, 0.6);
+	border-radius: 5px;
+	margin-left: 15vh;
+}
+
 #prestations .row .card img {
 	height: 30vh;
 	margin-top: 5vh;
