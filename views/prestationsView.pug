@@ -4,6 +4,7 @@ mixin prestation(prestation)
 	tr
 		td= prestation.titre
 		td= prestation.sous_titre
+		td= prestation.categorie.name
 		td= prestation.description
 		td= prestation.prix
 		td= prestation.duration
@@ -23,6 +24,7 @@ block data
 				tr
 					th Titre
 					th sous-titre
+					th categorie
 					th description
 					th prix
 					th durée
