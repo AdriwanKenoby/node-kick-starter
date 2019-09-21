@@ -1,15 +1,17 @@
 'use strict'
 
-const UserSchema = require('../DB/models/users'),
-PrestationSchema = require('../DB/models/prestations'),
+const User = require('../DB/models/users'),
+Prestation = require('../DB/models/prestations'),
 Categorie = require('../DB/models/categories'),
+Actualite = require('../DB/models/actualites'),
 fs = require('fs');
 
 const getAll = async (req, res, next) => {
-	const nb_users = await UserSchema.countDocuments({});
-	const prestations = await PrestationSchema.find({});
-	const nb_prestations = await PrestationSchema.countDocuments({});
+	const nb_users = await User.countDocuments({});
+	const prestations = await Prestation.find({}).populate('categorie');
+	const nb_prestations = await Prestation.countDocuments({});
 	const nb_categories = await Categorie.countDocuments({});
+	const nb_actualites = await Actualite.countDocuments({});
 	res.render('prestationsView', { 
 		title: 'Prestations View', 
 		user: req.user,
@@ -17,15 +19,17 @@ const getAll = async (req, res, next) => {
 		nb_users: nb_users,
 		data: prestations,
 		nb_prestations: nb_prestations,
-		nb_categories: nb_categories
+		nb_categories: nb_categories,
+		nb_actualites: nb_actualites
 	});
 };
 
 const getCreatePage = async (req, res, next) => {
-	const nb_users = await UserSchema.countDocuments({});
-	const nb_prestations = await PrestationSchema.countDocuments({});
+	const nb_users = await User.countDocuments({});
+	const nb_prestations = await Prestation.countDocuments({});
 	const nb_categories = await Categorie.countDocuments({});
 	const categories = await Categorie.find({});
+	const nb_actualites = await Actualite.countDocuments({});
 	res.render('prestationCreate', { 
 		title: 'Prestations Create', 
 		user: req.user,
@@ -33,13 +37,14 @@ const getCreatePage = async (req, res, next) => {
 		nb_users: nb_users,
 		nb_prestations: nb_prestations,
 		nb_categories: nb_categories,
-		categories: categories
+		categories: categories,
+		nb_actualites: nb_actualites
 	});
 };
 
 const create = (req, res, next) => {
 
-	const newPrestation = new PrestationSchema({
+	const newPrestation = new Prestation({
 		titre: req.body.titre,
 		sous_titre: req.body.sous_titre,
 		categorie: req.body.categorie,
@@ -56,14 +61,14 @@ const create = (req, res, next) => {
 };
 
 const getById = (req, res, next) => {
-	PrestationSchema.findById(req.params.id, (err, user) => {
+	Prestation.findById(req.params.id, (err, user) => {
 		if (err) return next(err);
 		res.json(user);
 	});
 };
 
 const deletePrestation = (req, res, next) => {
-	PrestationSchema.findByIdAndRemove(req.body.id, (err, doc) => {
+	Prestation.findByIdAndRemove(req.params.id, (err, doc) => {
 		if (err) return next(err);
 		fs.unlinkSync('./public/' + doc.imagePath);
 		res.redirect('/dashboard/prestations');
@@ -71,11 +76,12 @@ const deletePrestation = (req, res, next) => {
 };
 
 const getUpdatePage = async (req, res, next) => {
-	const prestation = await PrestationSchema.findById(req.params.id);
-	const nb_users = await UserSchema.countDocuments({});
-	const nb_prestations = await PrestationSchema.countDocuments({});
+	const prestation = await Prestation.findById(req.params.id).populate('categorie');
+	const nb_users = await User.countDocuments({});
+	const nb_prestations = await Prestation.countDocuments({});
 	const nb_categories = await Categorie.countDocuments({});
 	const categories = await Categorie.find({});
+	const nb_actualites = await Actualite.countDocuments({});
 	res.render('prestationCreate', {
 		title: 'Prestation Update',
 		user: req.user,
@@ -84,12 +90,13 @@ const getUpdatePage = async (req, res, next) => {
 		nb_prestations: nb_prestations,
 		prestation: prestation,
 		nb_categories: nb_categories,
-		categories: categories
+		categories: categories,
+		nb_actualites: nb_actualites
 	});
 };
 
 const update = async (req, res, next) => {
-	const prestation = await PrestationSchema.findById(req.params.id);
+	const prestation = await Prestation.findById(req.params.id);
 	
 	fs.unlinkSync('./public/' + prestation.imagePath);
 	

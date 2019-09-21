@@ -3,13 +3,13 @@
 const express = require('express'),
 router = express.Router(),
 usersController = require('../controllers/usersController'),
-asyncMiddleware = require('../utils/asyncMiddleware');
+asyncHandler = require('express-async-handler');
 
 /* GET users listing. */
-router.get('/', asyncMiddleware(usersController.getAll));
+router.get('/', asyncHandler(usersController.getAll));
 
 router.get('/:id', usersController.getById);
 
-router.delete('/', usersController.deleteUser);
+router.delete('/:id', usersController.deleteUser);
 
 module.exports = router;

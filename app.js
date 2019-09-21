@@ -24,6 +24,7 @@ const prestationsRouter = require('./routes/prestations');
 const openingHoursRouter = require('./routes/opening-hours');
 const appointmentRouter = require('./routes/appointment');
 const categoriesRouter = require('./routes/categories');
+const actualitesRouter = require('./routes/actualites');
 
 const app = express();
 
@@ -56,11 +57,11 @@ app.use(cookieParser(secret));
 app.use(session({
 	secret: secret,
 	name: 'sessionId',
-	resave: false,
-	saveUninitialized: false,
+	resave: true,
+	saveUninitialized: true,
 	cookie: { 
 		secure: false,
-		expires: new Date( Date.now() + 60 * 60 * 1000 ), // 1 hour
+		maxAge: new Date( Date.now() + 60 * 60 * 1000 ), // 1 hour
 		httpOnly: true
 	},
 	store: store
@@ -101,6 +102,7 @@ app.use('/dashboard/users', ensureLoggedIn('/login'), acl.authorize, usersRouter
 app.use('/profil', ensureLoggedIn('/login'), acl.authorize, profilRouter);
 app.use('/dashboard/categories', ensureLoggedIn('/login'), acl.authorize, categoriesRouter);
 app.use('/dashboard/prestations', ensureLoggedIn('/login'), acl.authorize, prestationsRouter);
+app.use('/dashboard/actualites' , ensureLoggedIn('/login'), acl.authorize, actualitesRouter);
 app.use('/dashboard/opening_hours', ensureLoggedIn('/login'), acl.authorize, openingHoursRouter);
 app.use('/appointment', ensureLoggedIn('/login'), acl.authorize, appointmentRouter);
 app.use('/', (req, res, next) => {

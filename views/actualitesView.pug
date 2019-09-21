@@ -1,0 +1,30 @@
+extends dashboard
+
+mixin actualite(actualite)
+	tr
+		td= actualite.titre
+		td.w-25
+			img.img-fluid.img-thumbnail.rounded-circle.w-25(src='../'+actualite.imagePath alt='Actualite image')
+		td= actualite.description
+		td= actualite.startAt
+		td= actualite.endAt
+		td.row
+			a.btn.btn-info.btn-sm.mx-1(href='/dashboard/actualites/'+actualite._id role='button') View
+			a.btn.btn-warning.btn-sm.mx-1(href='/dashboard/actualites/update/'+actualite._id role='button') Update
+			form(action='/dashboard/actualites/' + actualite._id + '?_method=DELETE' method='post')
+				button.btn.btn-danger.btn-sm.mx-1(type='submit') Delete
+
+block data
+	#actualites.table-responsive.my-2.p-2
+		table.table.table-striped
+			thead.thead-inverse
+				tr
+					th Titre
+					th Image
+					th Description
+					th startAt
+					th endAt
+					th Action
+			tbody
+				each actualite in data
+					+actualite(actualite)

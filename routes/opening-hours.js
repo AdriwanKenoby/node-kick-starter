@@ -2,23 +2,29 @@
 
 const express = require('express'),
 router = express.Router(),
-asyncMiddleware = require('../utils/asyncMiddleware'),
+asyncHandler = require('express-async-handler'),
 User = require('../DB/models/users'),
 Prestation = require('../DB/models/prestations'),
+Categorie = require('../DB/models/categories'),
+Actualite = require('../DB/models/actualites'),
 OpeningHours = require('../DB/models/opening-hours'),
 simpleOpeningHours = require("simple-opening-hours").SimpleOpeningHours;
 
-router.get('/', asyncMiddleware( async (req, res, next) => {
+router.get('/', asyncHandler( async (req, res, next) => {
 	const nb_users = await User.countDocuments({});
 	const nb_prestations = await Prestation.countDocuments({});
+	const nb_categories = await Categorie.countDocuments({});
 	const admins = await User.find({role: 'admin'});
+	const nb_actualites = await Actualite.countDocuments({});
 	res.render('openingHours', { 
 		title: 'Opening Hours', 
 		user: req.user , 
 		messages: res.locals.flash,
 		nb_users: nb_users,
 		nb_prestations: nb_prestations,
-		users: admins
+		nb_categories: nb_categories,
+		users: admins,
+		nb_actualites: nb_actualites
 	});
 }));
 

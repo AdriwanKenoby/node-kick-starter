@@ -2,17 +2,20 @@
 
 const express = require('express'),
 router = express.Router(),
-asyncMiddleware = require('../utils/asyncMiddleware'),
-Prestation = require('../DB/models/prestations');
+asyncHandler = require('express-async-handler'),
+Prestation = require('../DB/models/prestations'),
+Actualite = require('../DB/models/actualites');
 
 /* GET home page. */
-router.get('/', asyncMiddleware(async (req, res, next) => {
+router.get('/', asyncHandler(async (req, res, next) => {
 	const prestations = await Prestation.find({});
+	const actualites = await Actualite.find({});
 	res.render('home', { 
 		title: 'Home', 
 		user: req.user , 
 		messages: res.locals.flash,
-		prestations: prestations
+		prestations: prestations,
+		actualites: actualites
 	});
 }));
 

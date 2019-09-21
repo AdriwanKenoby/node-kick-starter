@@ -2,14 +2,14 @@
 
 const express = require('express'),
 router = express.Router(),
-prestationsController = require('../controllers/prestationsController'),
+actualitesController = require('../controllers/actualitesController'),
 asyncHandler = require('express-async-handler'),
 multer  = require('multer'),
 mime = require('mime');
 
 const storage = multer.diskStorage({
 	destination: function (req, file, cb) {
-		cb(null, './public/images/uploads/prestations')
+		cb(null, './public/images/uploads/actualites')
 	},
 	filename: function (req, file, cb) {
 		cb(null, file.fieldname + '-' + Date.now() + '.' + mime.getExtension(file.mimetype))
@@ -24,18 +24,18 @@ const upload = multer({
 	}
 });
 
-router.get('/', asyncHandler(prestationsController.getAll));
+router.get('/', asyncHandler(actualitesController.getAll));
 
-router.get('/create', asyncHandler(prestationsController.getCreatePage));
+router.get('/create', asyncHandler(actualitesController.getCreatePage));
 
-router.post('/create', upload.single('image'), prestationsController.create);
+router.post('/create', upload.single('image'), actualitesController.create);
 
-router.get('/:id', prestationsController.getById);
+router.get('/:id', actualitesController.getById);
 
-router.delete('/:id', prestationsController.deletePrestation);
+router.delete('/:id', actualitesController.deletePrestation);
 
-router.get('/update/:id', asyncHandler(prestationsController.getUpdatePage));
+router.get('/update/:id', asyncHandler(actualitesController.getUpdatePage));
 
-router.put('/update/:id', upload.single('image'), asyncHandler(prestationsController.update));
+router.put('/update/:id', upload.single('image'), asyncHandler(actualitesController.update));
 
 module.exports = router;

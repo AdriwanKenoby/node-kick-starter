@@ -1,0 +1,36 @@
+extends dashboard
+
+block append head
+	link(rel='stylesheet', href='/flatpickr/flatpickr.min.css')
+	script(type='text/javascript' src='/flatpickr/flatpickr.min.js')
+	
+block data
+	section.text-dark.w-100
+		.container.py-3
+			.row.justify-content-sm-center
+				.col-sm-12.col-md-12
+					.card.border-info.text-center
+						.card-header
+							| Create Prestation
+						.card-body
+							form(action='/dashboard/actualites/' + (actualite ? 'update/' + actualite._id + '?_method=PUT' : 'create') method='post' enctype='multipart/form-data')
+								fieldset
+									legend Prestation
+									.row.align-items-center.mt-4
+										.col
+											input.form-control(type='text' name='titre' placeholder='Titre' value=(actualite ? actualite.titre : false) required)
+									.row.align-items-center.mt-4
+										.col
+											textarea.form-control(name='description' placeholder='description' rows='8' cols='30' required)= (actualite ? actualite.description : '')
+									.row.align-items-center.mt-4
+										.col
+											input.custom-file(type='file' name='image' required)
+									row.align-items-center.mt-4
+										.col
+											input#flatpickr(type='text')
+											input#startAt(type='hidden' name='startAt')
+											input#endAt(type='hidden' name='endAt')
+											script(type='text/javascript' src='/javascripts/actualites.js')
+									.row.justify-content-start.mt-4
+										.col
+											input.btn.btn-primary.mt-4(type='submit')

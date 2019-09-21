@@ -22,10 +22,10 @@ block data
 										.col
 											select.form-control(name='categorie' required)
 												each categorie in categories
-													option(value=categorie._id selected=( prestation ? prestation.categorie===categorie._id : false))= categorie.name
+													option(value=categorie._id selected=(prestation ? prestation.categorie.name===categorie.name : false))= categorie.name
 									.row.align-items-center.mt-4
 										.col
-											textarea.form-control(name='description' placeholder='description' rows='8' cols='30' required)= (prestation ? prestation.description : false)
+											textarea.form-control(name='description' placeholder='description' rows='8' cols='30' required)= (prestation ? prestation.description : '')
 									.row.align-items-center.mt-4
 										.col
 											select.form-control(name='duration' placeholder='durée' required)

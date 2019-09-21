@@ -3,20 +3,21 @@
 const User = require('../DB/models/users'),
 Prestation = require('../DB/models/prestations'),
 Categorie = require('../DB/models/categories'),
-Actualite = require('../DB/models/actualites');
+Actualite = require('../DB/models/actualites'),
+fs = require('fs');
 
 const getAll = async (req, res, next) => {
 	const nb_users = await User.countDocuments({});
-	const categories = await Categorie.find({});
+	const actualites = await Actualite.find({});
 	const nb_prestations = await Prestation.countDocuments({});
 	const nb_categories = await Categorie.countDocuments({});
 	const nb_actualites = await Actualite.countDocuments({});
-	res.render('categoriesView', { 
-		title: 'Categories View', 
+	res.render('actualitesView', { 
+		title: 'Actualites View', 
 		user: req.user,
 		messages: res.locals.flash,
 		nb_users: nb_users,
-		data: categories,
+		data: actualites,
 		nb_prestations: nb_prestations,
 		nb_categories: nb_categories,
 		nb_actualites: nb_actualites
@@ -28,8 +29,8 @@ const getCreatePage = async (req, res, next) => {
 	const nb_prestations = await Prestation.countDocuments({});
 	const nb_categories = await Categorie.countDocuments({});
 	const nb_actualites = await Actualite.countDocuments({});
-	res.render('categorieCreate', { 
-		title: 'Categories Create', 
+	res.render('actualiteCreate', { 
+		title: 'Actualite Create', 
 		user: req.user,
 		messages: res.locals.flash,
 		nb_users: nb_users,
@@ -41,53 +42,69 @@ const getCreatePage = async (req, res, next) => {
 
 const create = (req, res, next) => {
 
-	const newCategorie = new Categorie({
-		name: req.body.name
+	const newActualite = new Actualite({
+		titre: req.body.titre,
+		description: req.body.description,
+		startAt: new Date(req.body.startAt),
+		endAt: new Date(req.body.endAt),
+		imagePath: 'images/uploads/actualites/' + req.file.filename
 	});
 
-	newCategorie.save((err) => {
+	newActualite.save((err) => {
 		if (err) return next(err);
-		res.redirect('/dashboard/categories');
+		res.redirect('/dashboard/actualites');
 	});
 };
 
 const getById = (req, res, next) => {
-	Categorie.findById(req.params.id, (err, categorie) => {
+	Actualite.findById(req.params.id, (err, user) => {
 		if (err) return next(err);
-		res.json(categorie);
+		res.json(user);
 	});
 };
 
-const deleteCategorie = (req, res, next) => {
-	Categorie.findByIdAndRemove(req.params.id, (err, doc) => {
+const deletePrestation = (req, res, next) => {
+	Actualite.findByIdAndRemove(req.params.id, (err, doc) => {
 		if (err) return next(err);
-		res.redirect('/dashboard/categories');
+		fs.unlinkSync('./public/' + doc.imagePath);
+		res.redirect('/dashboard/actualites');
 	});
 };
 
 const getUpdatePage = async (req, res, next) => {
-	const categorie = await Categorie.findById(req.params.id);
+	const actualite = await Actualite.findById(req.params.id);
 	const nb_users = await User.countDocuments({});
 	const nb_prestations = await Prestation.countDocuments({});
 	const nb_categories = await Categorie.countDocuments({});
 	const nb_actualites = await Actualite.countDocuments({});
-	res.render('categorieCreate', {
-		title: 'Categorie Update',
+	const categories = await Categorie.find({});
+	res.render('actualiteCreate', {
+		title: 'Actualite Update',
 		user: req.user,
 		messages: res.locals.flash,
 		nb_users: nb_users,
 		nb_prestations: nb_prestations,
-		categorie: categorie,
+		actualite: actualite,
 		nb_categories: nb_categories,
+		categories: categories,
 		nb_actualites: nb_actualites
 	});
 };
 
 const update = async (req, res, next) => {
-	const categorie = await Categorie.findById(req.params.id);	
-	categorie.name = req.body.name;
-	categorie.save();
-	res.redirect('/dashboard/categories');
+	const actualite = await Actualite.findById(req.params.id);
+	
+	fs.unlinkSync('./public/' + actualite.imagePath);
+	
+	actualite.titre = req.body.titre;
+	actualite.description = req.body.description;
+	actualite.imagePath = 'images/uploads/actualites/' + req.file.filename;
+	actualite.startAt= new Date(req.body.startAt);
+	actualite.endAt= new Date(req.body.endAt);
+	
+	actualite.save();
+	
+	res.redirect('/dashboard/actualites');
 };
 
 module.exports = {
@@ -95,7 +112,7 @@ module.exports = {
 		getCreatePage: getCreatePage,
 		create: create,
 		getById: getById,
-		deleteCategorie: deleteCategorie,
+		deletePrestation: deletePrestation,
 		getUpdatePage: getUpdatePage,
 		update: update
 };

@@ -2,11 +2,11 @@
 
 const express = require('express'),
 router = express.Router(),
-asyncMiddleware = require('../utils/asyncMiddleware'),
+asyncHandler = require('express-async-handler'),
 Prestation = require('../DB/models/prestations'),
 OpeningHours = require('../DB/models/opening-hours');
 
-router.get('/', asyncMiddleware(async (req, res, next) => {
+router.get('/', asyncHandler(async (req, res, next) => {
 	const prestations = await Prestation.find({});
 	const oh = await OpeningHours.findOne({user: req.user._id});
 	res.render('appointment', { 

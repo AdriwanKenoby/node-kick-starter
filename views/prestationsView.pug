@@ -13,8 +13,7 @@ mixin prestation(prestation)
 		td.row
 			a.btn.btn-info.btn-sm.mx-1(href='/dashboard/prestations/'+prestation._id role='button') View
 			a.btn.btn-warning.btn-sm.mx-1(href='/dashboard/prestations/update/'+prestation._id role='button') Update
-			form(action='/dashboard/prestations?_method=DELETE' method='post')
-				input(type='hidden' name='id' value=prestation._id required)
+			form(action='/dashboard/prestations/' + prestation._id + '?_method=DELETE' method='post')
 				button.btn.btn-danger.btn-sm.mx-1(type='submit') Delete
 
 block data

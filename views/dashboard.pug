@@ -23,6 +23,13 @@ block content
                 li.nav-item
                   a.nav-link(href='/dashboard/prestations') View
             li.nav-item
+              a.nav-link(href='#submenu3' data-toggle='collapse' data-target='#submenu3') Actualités &dtrif;
+              ul#submenu3.list-unstyled.flex-column.pl-3.collapse(aria-expanded='false')
+                li.nav-item
+                  a.nav-link(href='/dashboard/actualites/create') Create
+                li.nav-item
+                  a.nav-link(href='/dashboard/actualites') View
+            li.nav-item
               a.nav-link(href='/dashboard/opening_hours') Opening Hours
         .col-md-9.col-lg-10
           .row.m-1
@@ -53,7 +60,7 @@ block content
                   .rotate
                     i.fa.fa-share.fa-5x
                   h6.text-uppercase Shares
-                  h1.display-1 36
+                  h1.display-1 #{nb_actualites}
             hr
   
           .row

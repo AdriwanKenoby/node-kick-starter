@@ -5,26 +5,49 @@ block append head
 	
 mixin prestation(prestation)
 	.card.col-3.m-4.mx-2
-		img.card-image.img-fluid.rounded-circle(src='../'+prestation.imagePath alt='prestation image')
+		img.card-image.img-fluid.rounded-circle(src='../'+prestation.imagePath alt='prestation')
 		.card-body
 			h4.card-title.text-uppercase= prestation.titre
-			h6.card-subtitle.mb-2.text-light= prestation.sous_titre
+			h6.card-subtitle.mb-2= prestation.sous_titre
 			p.card-text= prestation.description
 			.row
 				.text-success.mx-2= prestation.prix
 				.text-info.mx-2= prestation.duration
-			
+
+mixin actualite(actualite, index)
+	.carousel-item(class=(index == 0 ? 'active' : ''))
+		img.img-fluid(src='../'+actualite.imagePath alt='actualite')
+		.carousel-caption
+			h4.text-uppercase= actualite.titre
+			p= actualite.description
+			.text-success.mx-2= actualite.startAt
+			.text-info.mx-2= actualite.endAt
+
 block content	
 	section.parallax.bg1
-		.row
-			#presentation.container.col-5.p-4
-				p Ici & Maintenant, je choisis de me faire du bien, de prendre soin de moi.
-				| Ici & Maintenant, je choisis de m’offrir un temps particulier, un temps en suspend.
-				| Ici & Maintenant, je choisis de respirer, de faire le vide pour m’emplir de douceur.
-				| Je choisis de porter attention sur mon corps, mon esprit, ma santé.
-				| Ici & Maintenant, sans penser à autre chose qu’à ma relaxation,
-				| j’accepte de lever le pied, de me détendre et de me sourire.
-				| Ici & Maintenant, pour ne pas remettre à plus tard ce qui est important.
+		.container
+				.d-flex.flex-row.align-items-center
+					#actualites.carousel.slide(data-ride='carousel')
+						ul.carousel-indicators
+							each actualite, index in actualites
+								li(data-target='#actualites' data-slide-to='1' class=(index == 0 ? 'active' : ''))
+						.carousel-inner
+							each actualite, index in actualites
+								+actualite(actualite, index)
+						a.carousel-control-prev(href='#actualites' data-slide='prev')
+							span.carousel-control-prev-icon
+						a.carousel-control-next(href='#actualites' data-slide='next')
+							span.carousel-control-next-icon
+					#presentation.col-6.mx-5.p-4.h-25
+						p.
+							Ici & Maintenant, je choisis de me faire du bien, de prendre soin de moi.
+							Ici & Maintenant, je choisis de m’offrir un temps particulier, un temps en suspend.
+							Ici & Maintenant, je choisis de respirer, de faire le vide pour m’emplir de douceur.
+							Je choisis de porter attention sur mon corps, mon esprit, ma santé.
+							Ici & Maintenant, sans penser à autre chose qu’à ma relaxation,
+							j’accepte de lever le pied, de me détendre et de me sourire.
+							Ici & Maintenant, pour ne pas remettre à plus tard ce qui est important.
+
 	section.static
 		.container#prestations
 			.row
@@ -32,4 +55,3 @@ block content
 					+prestation(prestation)
 			
 	section.parallax.bg2
-	

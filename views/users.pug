@@ -13,8 +13,7 @@ mixin user(user)
 		td= user.role
 		td.row
 			a.btn.btn-info.btn-sm.mx-1(href='/dashboard/users/'+user._id role='button') View
-			form(action='/dashboard/users?_method=DELETE' method='post')
-				input(type='hidden' name='id' value=user._id required)
+			form(action='/dashboard/users/' + user._id + '?_method=DELETE' method='post')
 				button.btn.btn-danger.btn-sm.mx-1(type='submit') Delete
 
 block data
