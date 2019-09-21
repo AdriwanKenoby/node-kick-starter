@@ -70,7 +70,10 @@ const getById = (req, res, next) => {
 const deletePrestation = (req, res, next) => {
 	Prestation.findByIdAndRemove(req.params.id, (err, doc) => {
 		if (err) return next(err);
-		fs.unlinkSync('./public/' + doc.imagePath);
+		if(fs.existsSync('./public/' + doc.imagePath)) {
+			fs.unlinkSync('./public/' + doc.imagePath);
+		}
+		
 		res.redirect('/dashboard/prestations');
 	});
 };
@@ -97,8 +100,9 @@ const getUpdatePage = async (req, res, next) => {
 
 const update = async (req, res, next) => {
 	const prestation = await Prestation.findById(req.params.id);
-	
-	fs.unlinkSync('./public/' + prestation.imagePath);
+	if(fs.existsSync('./public/' + prestation.imagePath)) {
+		fs.unlinkSync('./public/' + prestation.imagePath);
+	}
 	
 	prestation.titre = req.body.titre;
 	prestation.sous_titre = req.body.sous_titre;

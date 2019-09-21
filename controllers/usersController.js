@@ -33,7 +33,7 @@ const getById = (req, res, next) => {
 const deleteUser = (req, res, next) => {
 	User.findByIdAndRemove(req.params.id, (err, doc) => {
 		if (err) return next(err);
-		if(doc.avatar) {
+		if(doc.avatar && fs.existsSync('./public/' + doc.avatar)) {
 			fs.unlinkSync('./public/' + doc.avatar);
 		}
 		res.redirect('/dashboard/users');

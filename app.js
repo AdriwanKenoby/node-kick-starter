@@ -57,8 +57,8 @@ app.use(cookieParser(secret));
 app.use(session({
 	secret: secret,
 	name: 'sessionId',
-	resave: true,
-	saveUninitialized: true,
+	resave: false,
+	saveUninitialized: false,
 	cookie: { 
 		secure: false,
 		maxAge: new Date( Date.now() + 60 * 60 * 1000 ), // 1 hour
