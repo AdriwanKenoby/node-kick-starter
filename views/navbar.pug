@@ -5,28 +5,28 @@ nav.navbar.navbar-expand-sm.bg-dark.navbar-dark
 		span.navbar-toggler-icon
 	#collapsibleNavbar.collapse.navbar-collapse
 		ul.navbar-nav.mx-auto
-			li.nav-item.mx-1
+			li.nav-item.mx-2
 				a.nav-link(href='#') Massage & Bien-être
-			li.nav-item.mx-1
+			li.nav-item.mx-2
 				a.nav-link(href='#') Posturologie
-			li.nav-item.mx-1
+			li.nav-item.mx-2
 				a.nav-link(href='#') Réflexes archaïques
 			if !user
-				li#login.nav-item.mx-1
+				li#login.nav-item.mx-2
 					a.nav-link(href='/login') Se Connecter
-				li#register.nav-item.mx-1
+				li#register.nav-item.mx-2
 					a.nav-link(href='/register') S'enregistrer
 			else
-				li.nav-item.mx-1
+				li.nav-item.mx-2
 						a.nav-link(href='/appointment') RDV
 				li.nav-item.mx-1
 					a.nav-link(href='/profil') Profil
-				li#logout.nav-item.float-right.mx-1
-						a.nav-link(href='/logout') Déconnection
 				if user.role == 'admin'
-					li.nav-item.mx-1
+					li.nav-item.mx-2
 						a.nav-link(href='/dashboard') Admin Panel
-			li.nav-item.mx-5
+				li#logout.nav-item.mx-2
+						a.nav-link(href='/logout') Déconnection
+			li.nav-item.mx-2
 				a.nav-link(href='#')
 					i.fab.fa-facebook.fa-2x
 			

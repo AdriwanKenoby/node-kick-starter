@@ -11,9 +11,10 @@ const helmet = require('helmet');
 const flash = require('connect-flash');
 const methodOverride = require('method-override');
 const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
-const passport = require('./config/passport');
+const config = require('config');
+const passport = require('./utils/passport');
 const db = require('./DB/db');
-const acl = require('./config/nacl');
+const acl = require('./utils/nacl');
 
 const homeRouter = require('./routes/home');
 const authRouter = require('./routes/auth');
@@ -28,8 +29,8 @@ const actualitesRouter = require('./routes/actualites');
 
 const app = express();
 
-const uri = require('./config/dbUri'),
-dbUri = 'mongodb://' + uri.host + ':' + uri.port + '/' + uri.index;
+const dbCongif = config.get('dbConfig'),
+dbUri = 'mongodb://' + dbCongif.host + ':' + dbCongif.port + '/' + dbCongif.index;
 
 const store = new MongoDBStore({
 	uri: dbUri,
@@ -58,7 +59,7 @@ app.use(session({
 	secret: secret,
 	name: 'sessionId',
 	resave: false,
-	saveUninitialized: false,
+	saveUninitialized: true,
 	cookie: { 
 		secure: false,
 		maxAge: new Date( Date.now() + 60 * 60 * 1000 ), // 1 hour

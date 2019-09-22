@@ -1,9 +1,10 @@
 'use strict'
 //Set up mongoose connection
 const mongoose = require('mongoose');
-const uri = require('../config/dbUri');
+const config = require('config');
 
-const dbUri = "mongodb://" + uri.host + ':' + uri.port + '/' + uri.index;
+const dbConfig = config.get('dbConfig');
+const dbUri = "mongodb://" + dbConfig.host + ':' + dbConfig.port + '/' + dbConfig.index;
 
 mongoose.connect(dbUri, {
 	useCreateIndex: true,

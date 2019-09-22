@@ -5,7 +5,7 @@ const acl = require('express-acl');
 const options = {
 	yml: true,
 	filename: 'nacl.yml',
-	path: 'config',
+	path: 'utils',
 	baseUrl: '/',
 	decodedObjectName: 'user'
 };

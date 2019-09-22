@@ -11,11 +11,11 @@ block data
 				.col-sm-12.col-md-12
 					.card.border-info.text-center
 						.card-header
-							| Create Prestation
+							| Create Actualite
 						.card-body
 							form(action='/dashboard/actualites/' + (actualite ? 'update/' + actualite._id + '?_method=PUT' : 'create') method='post' enctype='multipart/form-data')
 								fieldset
-									legend Prestation
+									legend Actualité
 									.row.align-items-center.mt-4
 										.col
 											input.form-control(type='text' name='titre' placeholder='Titre' value=(actualite ? actualite.titre : false) required)
@@ -27,7 +27,7 @@ block data
 											input.custom-file(type='file' name='image' required)
 									row.align-items-center.mt-4
 										.col
-											input#flatpickr(type='text')
+											input#flatpickr(type='text' required)
 											input#startAt(type='hidden' name='startAt')
 											input#endAt(type='hidden' name='endAt')
 											script(type='text/javascript' src='/javascripts/actualites.js')

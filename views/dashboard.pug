@@ -1,67 +1,67 @@
 extends layout
 
 block content
-  section#dashboard
-    .container-fluid.py-3
-      .row
-        #sidebar.col-md-3.col-lg-2.sidebar-offcanvas(role='navigation')
-          ul.nav.nav-justified.flex-column.pl-1
-            li.nav-item
-              a.nav-link(href='/dashboard/users') Users management
-            li.nav-item
-              a.nav-link(href='#submenu1' data-toggle='collapse' data-target='#submenu1') Categories &dtrif;
-              ul#submenu1.list-unstyled.flex-column.pl-3.collapse(aria-expanded='false')
-                li.nav-item
-                  a.nav-link(href='/dashboard/categories/create') Create
-                li.nav-item
-                  a.nav-link(href='/dashboard/categories') View
-            li.nav-item
-              a.nav-link(href='#submenu2' data-toggle='collapse' data-target='#submenu2') Prestations &dtrif;
-              ul#submenu2.list-unstyled.flex-column.pl-3.collapse(aria-expanded='false')
-                li.nav-item
-                  a.nav-link(href='/dashboard/prestations/create') Create
-                li.nav-item
-                  a.nav-link(href='/dashboard/prestations') View
-            li.nav-item
-              a.nav-link(href='#submenu3' data-toggle='collapse' data-target='#submenu3') Actualités &dtrif;
-              ul#submenu3.list-unstyled.flex-column.pl-3.collapse(aria-expanded='false')
-                li.nav-item
-                  a.nav-link(href='/dashboard/actualites/create') Create
-                li.nav-item
-                  a.nav-link(href='/dashboard/actualites') View
-            li.nav-item
-              a.nav-link(href='/dashboard/opening_hours') Opening Hours
-        .col-md-9.col-lg-10
-          .row.m-1
-            .col-xl-2.col-lg-4
-              .card.card-inverse.card-success
-                .card-block.bg-success
-                  .rotate
-                    i.fa.fa-user.fa-5x
-                  h6.text-uppercase Users
-                  h1.display-1 #{nb_users}
-            .col-xl-2.col-lg-4
-              .card.card-inverse.card-danger
-                .card-block.bg-danger
-                  .rotate
-                    i.fa.fa-list.fa-4x
-                  h6.text-uppercase Prestations
-                  h1.display-1 #{nb_prestations}
-            .col-xl-2.col-lg-4
-              .card.card-inverse.card-info
-                .card-block.bg-info
-                  .rotate
-                    i.fa.fa-twitter.fa-5x
-                  h6.text-uppercase Categories
-                  h1.display-1 #{nb_categories}
-            .col-xl-2.col-lg-4
-              .card.card-inverse.card-warning
-                .card-block.bg-warning
-                  .rotate
-                    i.fa.fa-share.fa-5x
-                  h6.text-uppercase Shares
-                  h1.display-1 #{nb_actualites}
-            hr
-  
-          .row
-            block data
+		section#dashboard
+				.container-fluid.py-3
+						.row
+								#sidebar.col-md-3.col-lg-2.sidebar-offcanvas(role='navigation')
+										ul.nav.nav-justified.flex-column.pl-1
+												li.nav-item
+														a.nav-link(href='/dashboard/users') Users management
+												li.nav-item
+														a.nav-link(href='#submenu1' data-toggle='collapse' data-target='#submenu1') Categories &dtrif;
+														ul#submenu1.list-unstyled.flex-column.pl-3.collapse(aria-expanded='false')
+																li.nav-item
+																		a.nav-link(href='/dashboard/categories/create') Create
+																li.nav-item
+																		a.nav-link(href='/dashboard/categories') View
+												li.nav-item
+														a.nav-link(href='#submenu2' data-toggle='collapse' data-target='#submenu2') Prestations	&dtrif;
+														ul#submenu2.list-unstyled.flex-column.pl-3.collapse(aria-expanded='false')
+																li.nav-item
+																		a.nav-link(href='/dashboard/prestations/create') Create
+																li.nav-item
+																		a.nav-link(href='/dashboard/prestations') View
+												li.nav-item
+														a.nav-link(href='#submenu3' data-toggle='collapse' data-target='#submenu3') Actualités	&dtrif;
+														ul#submenu3.list-unstyled.flex-column.pl-3.collapse(aria-expanded='false')
+																li.nav-item
+																		a.nav-link(href='/dashboard/actualites/create') Create
+																li.nav-item
+																		a.nav-link(href='/dashboard/actualites') View
+												li.nav-item
+														a.nav-link(href='/dashboard/opening_hours') Opening	Hours
+								.col-md-9.col-lg-10
+										.row.m-1
+												.col-xl-2.col-lg-4
+														.card.card-inverse.card-success
+																.card-block.bg-success
+																		.rotate
+																				i.fa.fa-user.fa-5x
+																		h6.text-uppercase Users
+																		h1.display-1 #{nb_users}
+												.col-xl-2.col-lg-4
+														.card.card-inverse.card-danger
+																.card-block.bg-danger
+																		.rotate
+																				i.fa.fa-list.fa-4x
+																		h6.text-uppercase Prestations
+																		h1.display-1 #{nb_prestations}
+												.col-xl-2.col-lg-4
+														.card.card-inverse.card-info
+																.card-block.bg-info
+																		.rotate
+																				i.fa.fa-twitter.fa-5x
+																		h6.text-uppercase Categories
+																		h1.display-1 #{nb_categories}
+												.col-xl-2.col-lg-4
+														.card.card-inverse.card-warning
+																.card-block.bg-warning
+																		.rotate
+																				i.fa.fa-share.fa-5x
+																		h6.text-uppercase Actualités
+																		h1.display-1 #{nb_actualites}
+												hr
+		
+										.row
+												block data

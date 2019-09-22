@@ -3,9 +3,16 @@ html
 	head
 		block head
 			include ./head.pug
+			- const timeConverter = function (min) { 
+				- let hours = Math.floor(min / 60); 
+				- let minutes = Math.floor((min - (hours * 60)) ); 
+				- var string = '';
+				- string += hours > 0 ? hours + ' h ' : ''; 
+				- string += minutes > 0 ? minutes + ' min' : ''; 
+				- return string; 
+			-}
 	body
 		.sticky-top
-			include ./header.pug
 			include ./navbar.pug
 			include ./messages.pug
 		#main.container-fluid.p-0.m-0

@@ -29,13 +29,8 @@ block data
 									.row.align-items-center.mt-4
 										.col
 											select.form-control(name='duration' placeholder='durée' required)
-												option(value='30' selected=(prestation ? prestation.duration===30 : false)) 30 min
-												option(value='45' selected=(prestation ? prestation.duration==45 : false)) 45 min
-												option(value='60' selected=(prestation ? prestation.duration==60 : false)) 1 h
-												option(value='75' selected=(prestation ? prestation.duration==75 : false)) 1 h 15 min
-												option(value='90' selected=(prestation ? prestation.duration==90 : false)) 1 h 30 min
-												option(value='105' selected=(prestation ? prestation.duration==105 : false)) 1 h 45 min
-												option(value='120' selected=(prestation ? prestation.duration==120 : false)) 2 h
+												each val in [30, 45, 60, 75, 90, 105, 120]
+													option(value=val selected=(prestation ? prestation.duration===val : false))= timeConverter(val)
 										.col
 											input.form-control(type='number' name='prix' placeholder='Prix' value=(prestation ? prestation.prix : false) required)
 									.row.align-items-center.mt-4

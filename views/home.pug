@@ -5,23 +5,26 @@ block append head
 	
 mixin prestation(prestation)
 	.card.col-3.m-4.mx-2
-		img.card-image.img-fluid.rounded-circle(src='../'+prestation.imagePath alt='prestation')
+		img.card-image.img-fluid.rounded-circle(src='../' + prestation.imagePath alt='prestation')
 		.card-body
 			h4.card-title.text-uppercase= prestation.titre
 			h6.card-subtitle.mb-2= prestation.sous_titre
 			p.card-text= prestation.description
-			.row
-				.text-success.mx-2= prestation.prix
-				.text-info.mx-2= prestation.duration
+		.card-footer.row
+			p.mx-2= prestation.prix
+			i.fas.fa-euro-sign
+			p.ml-auto= timeConverter(prestation.duration)
 
 mixin actualite(actualite, index)
 	.carousel-item(class=(index == 0 ? 'active' : ''))
-		img.img-fluid(src='../'+actualite.imagePath alt='actualite')
+		img.img-fluid(src='../' + actualite.imagePath alt='actualite')
 		.carousel-caption
-			h4.text-uppercase= actualite.titre
-			p= actualite.description
-			.text-success.mx-2= actualite.startAt
-			.text-info.mx-2= actualite.endAt
+			.card-body
+				h4.text-uppercase= actualite.titre
+				p= actualite.description
+			.card-footer
+				.mx-2= actualite.startAt
+				.mx-2= actualite.endAt
 
 block content	
 	section.parallax.bg1

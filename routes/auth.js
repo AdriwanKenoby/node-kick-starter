@@ -2,14 +2,14 @@
 
 const express = require('express'),
 router = express.Router(),
-passport = require('../config/passport'),
+passport = require('../utils/passport'),
 crypto = require('crypto'),
 User = require('../DB/models/users'),
 Token = require('../DB/models/token'),
 jwt = require('jsonwebtoken'),
-transporter = require('../config/transport'),
-connetEnsureLoggedOut = require('connect-ensure-login').ensureLoggedOut;
-
+transporter = require('../utils/transport'),
+connetEnsureLoggedOut = require('connect-ensure-login').ensureLoggedOut,
+os = require('os');
 
 router.get('/login', connetEnsureLoggedOut('/'), (req, res, next) => {
 	res.render('signin', { messages: res.locals.flash });
@@ -79,13 +79,13 @@ router.post('/forgot', (req, res, next) => {
 				template: 'resetPassword',
 				context: { 					
 					name: user.username,
-					url: 'http://localhost:3000/reset_password/' + user._id + '/' + token
+					url: 'http://' + os.hostname() + ':3000/reset_password/' + user._id + '/' + token
 				}
 		};
 		transporter.sendMail(mail, (err, info) => {
 			if (err) return next(err);
 			req.flash('success', info.response.toString());
-			res.redirect('/forgot');
+			res.redirect('/login');
 		});
 
 	});
