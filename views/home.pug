@@ -1,60 +1,47 @@
 extends layout
 
 block append head
-	link(rel='stylesheet', href='/stylesheets/home.css')
+	link(rel='stylesheet' href='/stylesheets/home.css')
+	link(rel='stylesheet' href='/stylesheets/map.css')
+	link(rel='stylesheet' href='/stylesheets/actualites.css')
+	link(rel='stylesheet' href='/stylesheets/ol.css')
 	
-mixin prestation(prestation)
-	.card.col-3.m-4.mx-2
-		img.card-image.img-fluid.rounded-circle(src='../' + prestation.imagePath alt='prestation')
-		.card-body
-			h4.card-title.text-uppercase= prestation.titre
-			h6.card-subtitle.mb-2= prestation.sous_titre
-			p.card-text= prestation.description
-		.card-footer.row
-			p.mx-2= prestation.prix
-			i.fas.fa-euro-sign
-			p.ml-auto= timeConverter(prestation.duration)
-
-mixin actualite(actualite, index)
-	.carousel-item(class=(index == 0 ? 'active' : ''))
-		img.img-fluid(src='../' + actualite.imagePath alt='actualite')
-		.carousel-caption
-			.card-body
-				h4.text-uppercase= actualite.titre
-				p= actualite.description
-			.card-footer
-				.mx-2= actualite.startAt
-				.mx-2= actualite.endAt
+include actualites.pug
 
 block content	
-	section.parallax.bg1
-		.container
-				.d-flex.flex-row.align-items-center
-					#actualites.carousel.slide(data-ride='carousel')
-						ul.carousel-indicators
-							each actualite, index in actualites
-								li(data-target='#actualites' data-slide-to='1' class=(index == 0 ? 'active' : ''))
-						.carousel-inner
-							each actualite, index in actualites
-								+actualite(actualite, index)
-						a.carousel-control-prev(href='#actualites' data-slide='prev')
-							span.carousel-control-prev-icon
-						a.carousel-control-next(href='#actualites' data-slide='next')
-							span.carousel-control-next-icon
-					#presentation.col-6.mx-5.p-4.h-25
-						p.
-							Ici & Maintenant, je choisis de me faire du bien, de prendre soin de moi.
-							Ici & Maintenant, je choisis de m’offrir un temps particulier, un temps en suspend.
-							Ici & Maintenant, je choisis de respirer, de faire le vide pour m’emplir de douceur.
-							Je choisis de porter attention sur mon corps, mon esprit, ma santé.
-							Ici & Maintenant, sans penser à autre chose qu’à ma relaxation,
-							j’accepte de lever le pied, de me détendre et de me sourire.
-							Ici & Maintenant, pour ne pas remettre à plus tard ce qui est important.
-
+	section.parallax.bg1.row
+		#map.container.col-4.mx-5
+		#popup.ol-popup
+			a#popup-closer.ol-popup-closer(href='#')
+			#popup-content
+		script(src='/javascripts/bundle.js')
+		
+		.col
+			fieldset#horaires.col-6.mx-5.mb-4
+				legend La vie au centre
+				p Mardi 14 h 15 - 20 h 30
+				p Samedi (semaine paire) 14 h 15 - 18 h
+				p 06 07 68 26 30
+			.presentation.h-25.mx-5.p-4
+				p.
+					Ici & Maintenant, je choisis de me faire du bien, de prendre soin de moi.
+					Ici & Maintenant, je choisis de m’offrir un temps particulier, un temps en suspend.
+					Ici & Maintenant, je choisis de respirer, de faire le vide pour m’emplir de douceur.
+					Je choisis de porter attention sur mon corps, mon esprit, ma santé.
+					Ici & Maintenant, sans penser à autre chose qu’à ma relaxation,
+					j’accepte de lever le pied, de me détendre et de me sourire.
+					Ici & Maintenant, pour ne pas remettre à plus tard ce qui est important.
 	section.static
-		.container#prestations
-			.row
-				each prestation in prestations
-					+prestation(prestation)
-			
+		.container.my-5
+			#actualites.carousel.slide(data-ride='carousel')
+				ul.carousel-indicators
+					each actualite, index in actualites
+						li(data-target='#actualites' data-slide-to=index class=(index == 0 ? 'active' : ''))
+				.carousel-inner
+					each actualite, index in actualites
+						+actualite(actualite, index)
+				a.carousel-control-prev(href='#actualites' data-slide='prev')
+					span.carousel-control-prev-icon
+				a.carousel-control-next(href='#actualites' data-slide='next')
+					span.carousel-control-next-icon
 	section.parallax.bg2

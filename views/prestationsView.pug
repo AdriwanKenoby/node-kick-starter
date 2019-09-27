@@ -7,7 +7,7 @@ mixin prestation(prestation)
 		td= prestation.categorie.name
 		td= prestation.description
 		td= prestation.prix
-		td= prestation.duration
+		td= timeConverter(prestation.duration)
 		td.w-25
 			img.img-fluid.img-thumbnail.rounded-circle.w-25(src='../'+prestation.imagePath alt='prestation image')
 		td.row

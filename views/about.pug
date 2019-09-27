@@ -1,0 +1,37 @@
+extends layout
+
+block append head
+	link(rel='stylesheet' href='/stylesheets/home.css')
+	link(rel='stylesheet' href='/stylesheets/map.css')
+	link(rel='stylesheet' href='/stylesheets/actualites.css')
+	link(rel='stylesheet' href='/stylesheets/ol.css')
+	
+include actualites.pug
+
+block content	
+	section.parallax.bg1.row
+		.presentation.h-25.mx-5.p-4.w-25
+			p.
+				Entourée de Nature depuis ma tendre enfance, très tôt sensibilisée aux médecines douces, 
+				j'évolue dans l'univers du soin et de l'écologie... 
+				Ma curiosité du Vivant et des gens me fait rapidement prendre la route 
+				pour découvrir différentes façon de vivre. 
+				Je traverse la France et d'autres pays à la rencontre d'univers variés, 
+				de personnes fabuleuses, de découvertes ingénieuses.
+				Je me forge une opinion sur le monde et tente de m'y faire une place !
+		img.rounded-circle(src='images/logo_CNR.webp' alt='logo CNR')
+	section.static.p-5
+		img.rounded-circle(src='images/FFMBE-logo-RVB_petit.webp' alt='logo FFMBE')
+		.presentation.h-25.mx-5.p-4.w-25
+			p.
+				Au détour d'un chemin, je m'installe à La Rochelle...
+				J'entreprends alors de me former en Massage Bien-être, 
+				au Centre de Naturopathie Rénovée de Rochefort. 
+				J'apprécie tout particulièrement l'aspect préventif des méthodes qu'il propose,
+				ainsi que leur volonté de remettre l'Humain au cœur de sa Santé.
+				En 2018, j'obtiens la certification "Praticien en Spa" avec 7 techniques de MBE.
+	section.parallax.bg2
+		.presentation.h-25.mx-5.p-4.w-25
+			p.
+				Agréée par la FFMBE, dont je partage la déontologie, 
+				je vous propose des massages de qualité dans un univers propice à la détente et à l'échange.

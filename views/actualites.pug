@@ -1,0 +1,10 @@
+mixin actualite(actualite, index)
+	.carousel-item(class=(index == 0 ? 'active' : ''))
+		img.img-fluid(src='../' + actualite.imagePath alt='actualite')
+		.carousel-caption
+			.card-body
+				h4.text-uppercase= actualite.titre
+				p= actualite.description
+			.card-footer
+				.mx-2= actualite.startAt
+				.mx-2= actualite.endAt

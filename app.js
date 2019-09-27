@@ -59,10 +59,11 @@ app.use(session({
 	secret: secret,
 	name: 'sessionId',
 	resave: false,
+	rolling: true,
 	saveUninitialized: true,
 	cookie: { 
 		secure: false,
-		maxAge: new Date( Date.now() + 60 * 60 * 1000 ), // 1 hour
+		maxAge: 60 * 60 * 1000 , // 1 h
 		httpOnly: true
 	},
 	store: store
@@ -96,7 +97,7 @@ app.use('/js', express.static(__dirname + '/node_modules/@fortawesome/fontawesom
 app.use('/webfonts', express.static(__dirname + '/node_modules/@fortawesome/fontawesome-free/webfonts'));
 app.use('/flatpickr', express.static(__dirname + '/node_modules/flatpickr/dist'));
 
-app.use('/home', homeRouter);
+app.use('/', homeRouter);
 app.use('/', authRouter);
 app.use('/dashboard', ensureLoggedIn('/login'), acl.authorize, dashboardRouter);
 app.use('/dashboard/users', ensureLoggedIn('/login'), acl.authorize, usersRouter);

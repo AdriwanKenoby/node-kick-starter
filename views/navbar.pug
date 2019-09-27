@@ -1,32 +1,42 @@
-nav.navbar.navbar-expand-sm.bg-dark.navbar-dark
+nav.navbar.navbar-expand-sm.bg-dark.navbar-dark.fixed-top.py-0
 	a.navbar-brand(href='/home')
 		i.fas.fa-home
 	button.navbar-toggler(type='button' data-toggle='collapse' data-target='#collapsibleNavbar')
 		span.navbar-toggler-icon
 	#collapsibleNavbar.collapse.navbar-collapse
-		ul.navbar-nav.mx-auto
-			li.nav-item.mx-2
-				a.nav-link(href='#') Massage & Bien-être
-			li.nav-item.mx-2
-				a.nav-link(href='#') Posturologie
-			li.nav-item.mx-2
-				a.nav-link(href='#') Réflexes archaïques
-			if !user
-				li#login.nav-item.mx-2
-					a.nav-link(href='/login') Se Connecter
-				li#register.nav-item.mx-2
-					a.nav-link(href='/register') S'enregistrer
-			else
-				li.nav-item.mx-2
-						a.nav-link(href='/appointment') RDV
-				li.nav-item.mx-1
-					a.nav-link(href='/profil') Profil
+		if user
+			ul#nav-left.navbar-nav.mr-auto
+				li.nav-item.w-25
+					a.nav-link(href='/profil')
+						i.fas.fa-user
 				if user.role == 'admin'
-					li.nav-item.mx-2
-						a.nav-link(href='/dashboard') Admin Panel
-				li#logout.nav-item.mx-2
-						a.nav-link(href='/logout') Déconnection
-			li.nav-item.mx-2
+					li.nav-item
+						a.nav-link(href='/dashboard')
+							i.fas.fa-user-cog
+		ul.navbar-nav.mx-auto
+			li.nav-item
+				a.nav-link(href='/massage') Massage & Bien-être
+			li.nav-item
+				a.nav-link(href='#') Posturologie
+			li.nav-item
+				a.nav-link(href='#') Réflexes archaïques
+			if user
+				li.nav-item
+						a.nav-link(href='/appointment') RDV
+			li.nav-item
+				a.nav-link(href='/about') &#193; propos
+			li.nav-item.ml-5
 				a.nav-link(href='#')
 					i.fab.fa-facebook.fa-2x
-			
+		if !user
+			ul.navbar-nav
+				li#login.nav-item
+					a.nav-link(href='/login')
+						i.fas.fa-sign-in-alt
+				li#register.nav-item.mx-2
+					a.nav-link(href='/register') S'enregistrer
+		else
+			ul.navbar-nav.mx-5
+				li#logout.nav-item
+					a.nav-link(href='/logout')
+						i.fas.fa-sign-out-alt

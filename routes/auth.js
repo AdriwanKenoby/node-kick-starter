@@ -9,7 +9,8 @@ Token = require('../DB/models/token'),
 jwt = require('jsonwebtoken'),
 transporter = require('../utils/transport'),
 connetEnsureLoggedOut = require('connect-ensure-login').ensureLoggedOut,
-os = require('os');
+os = require('os'),
+config = require('config');
 
 router.get('/login', connetEnsureLoggedOut('/'), (req, res, next) => {
 	res.render('signin', { messages: res.locals.flash });
@@ -73,13 +74,13 @@ router.post('/forgot', (req, res, next) => {
 		const token = jwt.sign({ data: user.email }, secret, { expiresIn: '1h' });
 
 		let mail = {
-				from: 'no-reply@icietmaintenantbienetre.org',
+				from: config.get('smtp').sender,
 				to: user.email,
 				subject: 'Password',
 				template: 'resetPassword',
 				context: { 					
 					name: user.username,
-					url: 'http://' + os.hostname() + ':3000/reset_password/' + user._id + '/' + token
+					url: 'http://' + os.hostname() + ':' + (process.env.PORT || '3000') + '/reset_password/' + user._id + '/' + token
 				}
 		};
 		transporter.sendMail(mail, (err, info) => {

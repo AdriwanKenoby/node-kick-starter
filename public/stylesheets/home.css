@@ -25,9 +25,11 @@
 }
 
 .static {
-	background: linear-gradient(to right top, #8d51c4, #a47ed7, #beaae8, #dcd4f5,
+	background: linear-gradient(to left bottom, #4c3959, #a47ed7, #fad096, #dcd4f5,
 		#ffffff);
 	text-align: center;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
 }
 
 section {
@@ -38,31 +40,13 @@ section {
 	text-shadow: 0 0 5px #000;
 }
 
-#prestations .card {
-	background: rgba(255, 255, 255, 0.6);
-}
-
-#presentation {
+.presentation {
 	background: rgba(255, 255, 255, 0.6);
 	border-radius: 5px;
-	margin-left: 15vh;
 }
 
-#prestations h4 {
-	color: red;
-}
-
-#prestations h6 {
-	color: green;
-}
-
-#prestations .row .card img {
-	height: 30vh;
-	margin-top: 5vh;
-}
-
-#actualites img {
-	width: 100%;
-	height: 50vh;
-	border-radius: 15px;
+#horaires {
+	border: 2px solid white;
+	border-radius: 5px;
+	color: white;
 }

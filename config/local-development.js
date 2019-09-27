@@ -9,6 +9,7 @@ module.exports = {
 		smtp: {
 			host: 'localhost',
 			port: 1025,
-			secure: false
+			secure: false,
+			sender: 'no-reply@test.com'
 		}
 }

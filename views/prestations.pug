@@ -1,0 +1,11 @@
+mixin prestation(prestation)
+	.card.col-3.m-4.mx-2
+		img.card-image.img-fluid.rounded-circle(src='../' + prestation.imagePath alt='prestation')
+		.card-body
+			h4.card-title.text-uppercase= prestation.titre
+			h6.card-subtitle.mb-2= prestation.sous_titre
+			p.card-text= prestation.description
+		.card-footer.row
+			p.mx-2= prestation.prix
+			i.fas.fa-euro-sign
+			p.ml-auto= timeConverter(prestation.duration)

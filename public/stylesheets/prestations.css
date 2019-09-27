@@ -1,0 +1,16 @@
+#prestations h4 {
+	color: red;
+}
+
+#prestations h6 {
+	color: green;
+}
+
+#prestations .card {
+	background: rgba(255, 255, 255, 0.6);
+}
+
+#prestations .row .card img {
+	height: 30vh;
+	margin-top: 5vh;
+}
